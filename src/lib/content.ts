@@ -28,9 +28,9 @@ export const site = {
 
   // Social links (leave "" to hide)
   socials: {
-    youtube: "https://youtube.com/@yourchannel",
-    instagram: "https://instagram.com/yourhandle",
-    facebook: "",
+    youtube: "https://www.youtube.com/@itssabirvlogs9371",
+    instagram: "https://www.instagram.com/sabir.akhter1",
+    facebook: "https://www.facebook.com/share/1AwzJNGDzM/",
     tiktok: "",
   },
 };
@@ -242,8 +242,8 @@ export const stats = [
 ];
 
 export const youtube = {
-  channelName: "Sabir Creates",
-  channelUrl: "https://youtube.com/@yourchannel",
+  channelName: "Sabir Vlogs",
+  channelUrl: "https://www.youtube.com/@itssabirvlogs9371",
   blurb:
     "A monetized channel where I share edits, behind-the-scenes, and the craft of visual storytelling.",
   // Featured video IDs (replace with your own)
