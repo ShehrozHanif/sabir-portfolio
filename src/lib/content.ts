@@ -246,7 +246,7 @@ export const youtube = {
   blurb:
     "A monetized channel where I share edits, behind-the-scenes, and the craft of visual storytelling.",
   // Featured video IDs (replace with your own)
-  featured: ["ScMzIvxBSi4", "LXb3EKWsInQ", "5qap5aO4i9A"],
+  featured: ["NaRDBZJ-9bw", "WqlibHI4w8s", "M1h-KoSdopQ"],
 };
 
 export type Testimonial = {
