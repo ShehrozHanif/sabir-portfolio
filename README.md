@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sabir — Photography & Video Portfolio
 
-## Getting Started
+A cinematic, dark-themed one-page portfolio for **Sabir** — photographer & video editor (weddings, brand shoots, photography, video editing, YouTube, AI video).
 
-First, run the development server:
+Built with **Next.js 16 · TypeScript · Tailwind CSS v4 · Framer Motion**. Designed to deploy on **Vercel**.
+
+---
+
+## Run it locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the URL it prints (usually http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> Note: port 3000 may already be used by another app on this machine — the dev
+> server will pick the next free port, or run `PORT=3001 npm run dev`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 👉 How to put in your own content
 
-To learn more about Next.js, take a look at the following resources:
+**Almost everything lives in one file:** [`src/lib/content.ts`](src/lib/content.ts).
+Open it and edit the values — the whole site rebuilds from that data. You can change:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Your name, role, tagline, hero text, location, years of experience
+- **Email + WhatsApp number** (used by the contact buttons and form)
+- Social links (YouTube, Instagram, Facebook — leave `""` to hide one)
+- The **About** paragraphs, portrait photo, and tools list
+- The **Services** list
+- The **Portfolio** items (`works`) — title, category, photo, and video IDs
+- **Stats** counters, **YouTube** featured videos, and **Testimonials**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Swapping photos
 
-## Deploy on Vercel
+Each portfolio item has an `img` URL. The current images are royalty-free
+placeholders. To use your own:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Drop your photo files into the **`public/`** folder (e.g. `public/wedding-1.jpg`).
+2. In `content.ts`, set `img: "/wedding-1.jpg"`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Swapping videos
+
+Each video item has a `youtubeId` — that's the part after `v=` in a YouTube
+link (e.g. for `youtube.com/watch?v=ABC123`, the ID is `ABC123`). Replace the
+placeholder IDs with your real ones. The same applies to `youtube.featured`.
+
+### Design colors
+
+The palette (dark background + gold accent) is defined as CSS variables at the
+top of [`src/app/globals.css`](src/app/globals.css) — `--color-gold`,
+`--color-bg`, etc. Change them there to re-theme the whole site.
+
+---
+
+## Deploy to Vercel
+
+1. Push this folder to a GitHub repo.
+2. Import the repo at [vercel.com/new](https://vercel.com/new) — it auto-detects Next.js.
+3. Deploy. That's it.
+
+---
+
+## Project structure
+
+```
+src/
+  app/
+    layout.tsx        # fonts (Fraunces + Inter) + metadata/SEO
+    globals.css       # design tokens, effects, animations
+    page.tsx          # assembles all sections in order
+  components/
+    Navbar.tsx  Hero.tsx  Stats.tsx  Portfolio.tsx  About.tsx
+    Services.tsx  YouTube.tsx  Testimonials.tsx  Contact.tsx  Footer.tsx
+    ui/ Reveal.tsx  SectionHeading.tsx
+  lib/
+    content.ts        # ← ALL editable content lives here
+```
+
+Accessibility & polish built in: keyboard focus rings, `prefers-reduced-motion`
+support, responsive from 375px up, semantic labels, and lazy-loaded media.

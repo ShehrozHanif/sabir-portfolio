@@ -1,26 +1,205 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   SABIR — Cinematic Dark Design System
+   Palette: near-black + warm off-white + refined gold
+   ============================================================ */
+
+@theme {
+  /* Core surfaces */
+  --color-bg: #0a0a0b;
+  --color-bg-soft: #0f0f11;
+  --color-surface: #141416;
+  --color-surface-2: #1a1a1d;
+
+  /* Text */
+  --color-text: #f5f4ef;
+  --color-muted: #a6a29a;
+  --color-dim: #6b6862;
+
+  /* Accent — refined gold */
+  --color-gold: #cba35c;
+  --color-gold-bright: #e4c078;
+  --color-gold-deep: #9c7a3e;
+
+  /* Lines */
+  --color-line: rgba(245, 244, 239, 0.08);
+  --color-line-gold: rgba(203, 163, 92, 0.22);
+
+  /* Fonts */
+  --font-display: var(--font-display), Georgia, serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+
+  /* Motion easing (Expo.out — cinematic) */
+  --ease-cinema: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(203, 163, 92, 0.3);
+  color: #fff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2e;
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-deep);
+}
+
+/* Visible keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Typography helpers ---------- */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Small uppercase label ("eyebrow") */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-gold);
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-gold-bright),
+    var(--color-gold) 45%,
+    var(--color-gold-deep)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Thin hairline divider with gold pip */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-line-gold),
+    transparent
+  );
+}
+
+/* ---------- Effects ---------- */
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.vignette {
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 40%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+.glass {
+  background: rgba(20, 20, 22, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-line);
+}
+
+/* Ambient gold glow blob */
+.glow-gold {
+  background: radial-gradient(
+    circle,
+    rgba(203, 163, 92, 0.16) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+}
+
+/* ---------- Ambient animation ---------- */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0);
+  }
+}
+.animate-float-slow {
+  animation: float-slow 16s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Scroll-cue bounce */
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
+  }
+}
+.animate-scroll-cue {
+  animation: scroll-cue 1.8s var(--ease-cinema) infinite;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
