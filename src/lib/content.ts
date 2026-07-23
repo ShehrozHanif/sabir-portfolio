@@ -36,8 +36,7 @@ export const site = {
 };
 
 export const about = {
-  portrait:
-    "https://images.unsplash.com/photo-1500048993953-d23a436266cf?auto=format&fit=crop&w=900&q=80",
+  portrait: "/s1.jpeg",
   paragraphs: [
     "I'm Sabir — a photographer and video editor with a decade of work spanning wedding days, brand campaigns, and the quiet in-between moments that make a story feel real.",
     "I shoot stills and motion, then live in the edit until every frame earns its place. From a bride's first look to a brand's hero film, my job is the same: make people feel something.",
